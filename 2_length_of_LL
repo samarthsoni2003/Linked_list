@@ -1,0 +1,12 @@
+https://www.codingninjas.com/studio/problems/count-nodes-of-linked-list_5884?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=SUBMISSION
+
+int length(Node *head)
+{
+	Node*temporary=head;
+    int length=1;
+    while(temporary->next!=NULL){
+        length++;
+        temporary=temporary->next;
+    }
+    return length;
+}
