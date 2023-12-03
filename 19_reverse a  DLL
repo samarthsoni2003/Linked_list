@@ -1,0 +1,20 @@
+https://www.codingninjas.com/studio/problems/reverse-a-doubly-linked-list_1116098?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+LOGIC 1
+    if(head->next==NULL){
+        return head;
+    }
+    Node*temporary1=head;
+    Node*temporary2=head;
+    while(temporary2->next!=NULL){
+        temporary2=temporary2->next;
+    }
+    while(temporary1<temporary2){
+        swap(temporary1->data,temporary2->data);
+        temporary1=temporary1->next;
+        temporary2=temporary2->prev;
+    }
+    return head;
+
+    LOGIC 2
+    
