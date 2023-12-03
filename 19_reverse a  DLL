@@ -17,4 +17,23 @@ LOGIC 1
     return head;
 
     LOGIC 2
+    Node*original_head=head;
+    Node*temp1=head->next;
+    if(head->next==NULL){
+        return head;
+    }
+     Node*temp2=temp1->next;
+    while(temp1!=NULL){
+        original_head->prev=temp1;
+        original_head->prev->next=original_head;
+        original_head=original_head->prev;
+        temp1=temp2;
+        if(temp2==NULL){
+            break;
+        }
+        temp2=temp2->next;
+    }
+    head->next=NULL;
+    return original_head;
+
     
