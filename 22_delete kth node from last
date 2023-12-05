@@ -1,0 +1,48 @@
+https://www.codingninjas.com/studio/problems/delete-kth-node-from-end_799912?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=SUBMISSION
+
+Node*reverse_LL(Node*head){
+    Node*original_head=head;
+    Node*temp1=head->next;
+    if(head->next==NULL){
+        return head;
+    }
+     Node*temp2=temp1->next;
+    while(temp1!=NULL){
+        Node*temp3=new Node(temp1->data,original_head);
+        original_head=temp3;
+        temp1=temp2;
+        if(temp2==NULL){
+            break;
+        }
+        temp2=temp2->next;
+    }
+    head->next=NULL;
+    return original_head;
+}
+
+Node* removeKthNode(Node* head, int K)
+{
+    head=reverse_LL(head);
+    if(head->next==NULL){
+        return NULL;
+    }
+    if(K==1){
+        Node*temp_head=head;
+        head=head->next;
+        free(temp_head);
+        head=reverse_LL(head);
+        return head;
+    }
+    int counter=1;
+    Node*prev_than_counter=head;
+    Node*counter_node=head;
+    while(counter!=K){
+        prev_than_counter=counter_node;
+        counter_node=counter_node->next;
+        counter++;
+    }
+    prev_than_counter->next=counter_node->next;
+    free(counter_node);
+    Node*final_ans=reverse_LL(head);
+    return final_ans;
+}
