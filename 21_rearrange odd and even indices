@@ -1,0 +1,18 @@
+https://www.codingninjas.com/studio/problems/rearrange-odd-and-even-places_920379?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=PROBLEM
+
+Node*tempodd=head;
+    Node*tempeven=head->next;
+    Node*start_even=tempeven;
+    while(tempodd!=NULL && tempeven!=NULL){
+        if(tempeven->next!=NULL){
+            tempodd->next=tempodd->next->next;
+            tempodd=tempodd->next;
+            tempeven->next=tempeven->next->next;
+            tempeven=tempeven->next;
+        }
+        else{
+            break;
+        }
+    }
+    tempodd->next=start_even;
+    return head;
