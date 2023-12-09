@@ -1,0 +1,8 @@
+https://www.codingninjas.com/studio/problems/insert-node-at-the-beginning_8144739?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+Node* insertAtFirst(Node* list, int newValue) {
+    Node*temp=new Node(newValue);
+    temp->next=list;
+    list=temp;
+    return list;
+}
