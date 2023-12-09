@@ -1,0 +1,10 @@
+https://www.codingninjas.com/studio/problems/insert-at-the-front-of-a-doubly-linked-list_9697366?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+ if(head==NULL){
+        Node* naya=new Node(k,NULL,NULL);
+        return naya;
+    }
+    Node*temp=new Node(k,NULL,head);
+    head->prev=temp;
+    head=temp;
+    return head;
