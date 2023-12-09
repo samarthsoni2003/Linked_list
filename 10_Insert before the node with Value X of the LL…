@@ -1,0 +1,20 @@
+https://www.codingninjas.com/studio/problems/insert-node-before-value_9886941
+
+ Node*nayawala=new Node(x);
+    if(head==NULL){
+        return nayawala; 
+    }
+    if(head->data==val){
+        nayawala->next=head;
+        return nayawala;
+    }
+    Node*iterator=head->next;
+    Node*previous=head;
+    while(iterator->data!=val){
+        previous=iterator;
+        iterator=iterator->next;
+    }
+    nayawala->next=previous->next;
+    previous->next=nayawala;
+    return head;
+}
