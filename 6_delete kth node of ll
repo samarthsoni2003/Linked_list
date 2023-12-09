@@ -1,0 +1,34 @@
+https://www.codingninjas.com/studio/problems/delete-node-in-ll_5881
+
+if(head==NULL){
+		return NULL;
+	}
+	 Node*temporary=head;
+	int length_of_LL=1;
+	while(temporary->next!=NULL){
+		temporary=temporary->next;
+		length_of_LL++;
+	}
+	if(pos>length_of_LL-1){
+		return head;
+	}
+	else if(pos==0){
+		Node*temporary2=head;
+		head=head->next;
+		free(temporary2);
+		return head;
+	}
+	else{
+		int index_iterator=0;
+		Node*temporary3=head;
+		Node*temporary4=head;
+		while(index_iterator!=pos){
+			temporary4=temporary3;
+			temporary3=temporary3->next;
+			index_iterator++;
+		}
+		temporary4->next=temporary3->next;
+		free(temporary3);
+		return head;
+	}
+}
