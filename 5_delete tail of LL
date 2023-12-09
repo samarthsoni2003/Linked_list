@@ -1,0 +1,13 @@
+https://www.codingninjas.com/studio/problems/delete-node-of-linked-list_8160463?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+Node *deleteLast(Node *list){
+    Node*temp=list;
+    Node*temp2=list;
+    while(temp->next!=NULL){
+        temp2=temp;
+        temp=temp->next;
+    }
+    temp2->next=NULL;
+    free(temp);
+    return list;
+}
