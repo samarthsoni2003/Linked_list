@@ -1,0 +1,13 @@
+https://www.codingninjas.com/studio/problems/insert-before-the-given-node-of-a-doubly-linked-list_9719100?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+ if(head==NULL){
+        return NULL;
+    }
+    if(head->next==NULL){
+        return NULL;
+    }
+    Node*temp=head;
+    head=head->next;
+    head->prev=NULL;
+    free(temp);
+    return head;
