@@ -1,0 +1,11 @@
+https://www.codingninjas.com/studio/problems/insert-at-the-front-of-a-doubly-linked-list_9697867?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+void insertAtGivenNode(Node *node, int val) {
+    Node*temp=node->prev;
+    Node*naya=new Node(val);
+    temp->next=naya;
+    naya->next=node;
+    node->prev=naya;
+    naya->prev=temp;
+    return;
+}
