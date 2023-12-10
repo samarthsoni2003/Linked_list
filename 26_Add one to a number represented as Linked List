@@ -14,37 +14,21 @@ Node* function_to_reverse_ll_recursive(Node*original_head,Node*temp1,Node*temp2,
 Node *addOne(Node *head)
 {
     int carry_over=0;
-    Node*temp1=head->next;
-    Node*temp2=temp1->next;
-    Node*reverse_ke_bad_head=new Node();
-    if(head->next==NULL){
-        if (head->data == 9) {
-          head->data = 0;
-          carry_over = 1;
-          Node *carry_ove_node = new Node(1, head);
-          head = carry_ove_node;
-          return head;
-        } 
-        else {
-          head->data += 1;
-        }
-    }     
-     else{
-        Node*temp1=head->next;
-        Node*temp2=temp1->next;
+     Node*temp1=head;
+     Node*temp2=temp1->next;
         Node*original_head=head;
         Node*final_ans=function_to_reverse_ll_recursive(original_head, temp1, temp2, head);
         temp1=final_ans;
         temp2=temp1->next;
-        reverse_ke_bad_head=final_ans;
-        if(temp1->data==9){
-         temp1->data=0;
-         carry_over=1;
-        }
-        else{
-         temp1->data+=1;
-        }
-        while(temp2!=NULL){
+        Node*reverse_ke_bad_head=final_ans;
+         if(temp1->data==9){
+          temp1->data=0;
+          carry_over=1;
+         }
+         else{
+          temp1->data+=1;
+         }
+        while(temp2 != NULL){
          Node*nayawala=new Node();
          if(temp2->data==9 && carry_over==1) {
            temp2->data = 0;
@@ -62,11 +46,11 @@ Node *addOne(Node *head)
         reverse_ke_bad_head->next=NULL;
         if(carry_over==0){
          return temp1;
-        }
-        else if(carry_over==1){
-         Node *carry_ove_node=new Node(1, temp1);
-         temp1=carry_ove_node;
+        } else if (carry_over == 1) {
+         Node *carry_ove_node = new Node(1, temp1);
+         temp1 = carry_ove_node;
          return temp1;
-     }
-    }
+        }
 }
+
+
