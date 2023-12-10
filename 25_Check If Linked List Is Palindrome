@@ -21,3 +21,35 @@ LOGIC 1
    return true;
 
    LOGIC 2
+{
+    Node*slow=head;
+    Node*fast=head;
+    while(fast->next && fast->next->next){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    Node*T1=slow->next;
+    Node*T2=T1->next;
+    Node*slow_duplicate=slow;
+     if(fast->next){
+        fast=fast->next;
+    }
+    while(T1){
+            T1->next=slow_duplicate;
+            slow_duplicate=T1;
+            T1=T2;
+            if(T2==NULL){
+                break;
+            }
+            T2=T2->next;
+        }
+    slow->next=NULL;
+    Node*comparison=head;
+    while(comparison->next && fast->next){
+        if(comparison->data != fast->data){
+            return false;
+        }
+        comparison=comparison->next;
+        fast=fast->next;
+    }
+    return true;
