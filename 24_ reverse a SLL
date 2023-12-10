@@ -1,0 +1,29 @@
+https://www.codingninjas.com/studio/problems/reverse-linked-list_920513?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries
+
+Node* function_to_reverse_ll_recursive(Node*original_head,Node*temp1,Node*temp2,Node*head){
+     if(temp1==NULL){
+         return original_head;
+     }
+    temp1->next=original_head;
+    original_head=temp1;
+    temp1=temp2;
+    if(temp2==NULL){
+        head->next=NULL;
+        return original_head;
+    }
+    temp2=temp2->next;
+    return function_to_reverse_ll_recursive(original_head,temp1,temp2,head);
+}
+
+Node* reverseLinkedList(Node *head)
+{
+    Node*original_head=head;
+    if(head->next==NULL){
+        return head;
+    }
+    Node*temp1=head->next;
+    Node*temp2=temp1->next;
+    original_head->next=NULL;
+    Node*final_ans=function_to_reverse_ll_recursive(original_head,temp1,temp2,head);
+    return final_ans; 
+}
