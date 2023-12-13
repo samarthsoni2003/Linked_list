@@ -1,0 +1,20 @@
+https://www.codingninjas.com/studio/problems/cycle-detection-in-a-singly-linked-list_628974?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+ool detectCycle(Node *head) {
+     if (head == NULL || head->next == NULL){
+         return false;
+     }
+     else if(head->next==head){
+         return true;
+     }
+     Node*slow=head->next;
+     Node*fast=slow->next;
+     while(slow != fast){
+         if(fast==NULL || fast->next==NULL){
+             return false;
+         }
+         slow=slow->next;
+         fast=fast->next->next;
+     }
+     return true;
+}
