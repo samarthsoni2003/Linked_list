@@ -1,0 +1,68 @@
+https://leetcode.com/problems/linked-list-cycle-ii/description/
+
+ListNode *check_wether_in_cycle(int length_of_cycle,int fast_ka_length,ListNode *head,int mid,ListNode *slow){
+        int dummy=fast_ka_length+mid;
+        dummy-=length_of_cycle;
+        int jumps_counter=0;
+        ListNode *iterator=head;
+        while(jumps_counter != dummy){
+            iterator=iterator->next;
+            jumps_counter++;
+        }
+       ListNode *element_checker=slow;
+       int length_counter_cycle=0;
+       while(length_counter_cycle != length_of_cycle){
+           if(iterator==element_checker){
+               return iterator;
+           }
+           element_checker=element_checker->next;
+           length_counter_cycle++;
+       }
+       return NULL;
+    }
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL || head->next==NULL){
+            return NULL;
+        }
+        ListNode*slow=head->next;
+        ListNode*fast=head->next->next;
+        while(slow!=fast){
+            if(fast==NULL || fast->next==NULL){
+                return NULL;
+            }
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        if(fast==head){
+            return fast;
+        }
+        int length_of_cycle=1;
+        fast=fast->next;
+        while(fast != slow){
+            fast=fast->next;  
+            length_of_cycle++;
+        }
+         ListNode*temp=head;
+         int fast_ka_length=1;
+         while(temp != fast){
+             temp=temp->next;
+            fast_ka_length++;
+         }
+        int s=0;
+        int e=length_of_cycle-1;
+        ListNode *final_ans=head;
+        while(s<=e){
+            int mid=s+((e-s)/2);
+                      
+            ListNode*final_checker=check_wether_in_cycle(length_of_cycle,fast_ka_length,head,mid,slow);
+                          if(final_checker){
+                            final_ans=final_checker;
+                              e=mid-1;
+                          }
+                          else{
+                              s=mid+1;
+                          }
+        }
+        return final_ans;
+    }
+};
