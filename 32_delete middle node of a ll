@@ -1,0 +1,22 @@
+https://www.codingninjas.com/studio/problems/delete-middle-node_763267?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=PROBLEM
+
+Node* deleteMiddle(Node* head){
+    if(head->next==NULL){
+        return NULL;
+    }
+   Node*slow=head;
+   Node*fast=head;
+   Node*prev_slow=slow;
+   while(fast->next && fast->next->next){
+       prev_slow=slow;
+       slow=slow->next;
+       fast=fast->next->next;
+   }
+   if(fast->next){
+       prev_slow=slow;
+       slow=slow->next;
+   }
+   prev_slow->next=slow->next;
+ 
+   return head;
+}
