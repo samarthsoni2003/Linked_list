@@ -1,0 +1,27 @@
+https://www.codingninjas.com/studio/problems/find-pairs-with-given-sum-in-doubly-linked-list_1164172?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+vector<pair<int, int>> findPairs(Node* head, int k)
+{
+    Node*temp_head=head;
+    Node*tail=head;
+    vector<pair<int,int>> ans;
+    pair<int ,int> p;
+    while(tail->next){
+        tail=tail->next;
+    }
+    while(temp_head != tail){
+        if(temp_head->data + tail->data == k){
+            p.first=temp_head->data;
+            p.second=tail->data;
+            ans.push_back(p);
+            temp_head=temp_head->next;
+        }
+        else if(temp_head->data + tail->data < k){
+            temp_head=temp_head->next;
+        }
+        else{
+            tail=tail->prev;
+        }
+    }
+    return ans;
+}
