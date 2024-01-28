@@ -1,0 +1,33 @@
+https://www.codingninjas.com/studio/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+Node * deleteAllOccurrences(Node* head, int k) {
+if(head==NULL || head->next==NULL){
+        return NULL;
+    }
+    Node*t1=head;
+    Node*t2=t1->next;
+    while(t1){
+        if(t1->data==k){
+            if(t1->prev==NULL){
+                if(t2==NULL){
+                    return NULL;
+                }
+
+                t2->prev=NULL;
+                head=t2;
+            }
+             else {
+                t1->prev->next = t2;
+                if(t2){
+                    t2->prev = t1->prev;
+                }
+            }
+        }
+            t1=t2;
+            if(t2==NULL){
+                break;
+            }
+            t2=t2->next;
+        }
+        return head;
+    }
