@@ -1,0 +1,34 @@
+https://www.codingninjas.com/studio/problems/rotate-linked-list_920454?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+Node *rotate(Node *head, int k) {
+     Node* iterator=head;
+     int size=1;
+     while(iterator->next){
+          iterator=iterator->next;
+          size++;
+     }
+
+     if(k>size){
+          k=k%size;
+     }
+
+     int counter=0;
+     Node* tail=iterator;
+     Node* tail_prev=head;
+
+     while(counter < k){
+          tail_prev=head;
+          while(tail_prev->next->next){
+               tail_prev=tail_prev->next;
+          }
+
+          tail_prev->next=NULL;
+          tail->next=head;
+          head=tail;
+          tail=tail_prev;
+
+          counter++;
+     }
+
+     return head;
+}
