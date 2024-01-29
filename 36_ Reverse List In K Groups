@@ -1,0 +1,89 @@
+https://www.codingninjas.com/studio/problems/reverse-list-in-k-groups_983644?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+Node* reverse(Node* temp_head, Node* temp_tail,int k,Node* temp_ans){
+    Node* stored_next_temp_tail=temp_tail->next;
+    Node* rev_temp_head=temp_head;
+    Node*t1=temp_head->next;
+    Node*t2=t1->next;
+    int counter=1;
+    
+     while(counter < k){
+        t1->next=rev_temp_head;
+        rev_temp_head=t1;
+
+        if(t2){
+            t1=t2;
+            t2=t2->next;
+        }
+        else{
+            break;
+        }
+    counter++;
+     }
+
+     temp_head->next=NULL;
+    return rev_temp_head;
+ }
+
+Node* kReverse(Node* head, int k) {
+
+    Node* temporary=head;
+    int n=1;
+    while(temporary->next){
+        temporary=temporary->next;
+        n++;
+    }
+
+
+    int number_of_times_loop_run=n/k;
+    int loop_counter=0;
+    Node*temp_head=head;
+    int count=1;
+    Node* temp_tail=NULL;
+    Node*final_ans=NULL;
+    Node*temp_ans=NULL;
+    Node*soln=NULL;
+    Node* stored_next_temp_tail=NULL;
+
+    if(k==1){
+        return head;
+    }
+
+    while(loop_counter < number_of_times_loop_run){
+    
+        if(loop_counter != 0){
+            temp_head=stored_next_temp_tail;
+        }
+
+        count=1;
+        temp_tail=temp_head;
+        while(count < k){
+            temp_tail=temp_tail->next;
+            if(temp_tail==NULL){
+                break;
+            }
+            count++;
+        }
+        stored_next_temp_tail=temp_tail->next;
+
+        soln=reverse(temp_head,temp_tail,k,temp_ans);
+
+        if(temp_ans){
+        temp_ans->next=temp_tail;
+    }
+        temp_ans=temp_head;
+
+        if(loop_counter == 0){
+            final_ans=soln;
+        }
+
+        loop_counter++;
+    }
+
+    int remainder=n%k;
+    if(remainder != 0){
+        temp_ans->next=stored_next_temp_tail;
+    }
+    
+    return final_ans;
+}    
