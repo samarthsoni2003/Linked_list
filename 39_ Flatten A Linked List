@@ -1,0 +1,68 @@
+https://www.codingninjas.com/studio/problems/flatten-a-linked-list_1112655?leftPanelTabValue=PROBLEM
+
+Node* flattenLinkedList(Node* head) 
+{
+    Node* dummy_head=new Node(0);
+    Node* dummy_temp=dummy_head;
+    Node* dummy_i=NULL;
+    Node* dummy_j=NULL;
+    Node* temp_head=head;
+    Node* temp_child=head;
+    bool connected=0;
+
+    dummy_temp->child=temp_child;
+    dummy_temp=dummy_temp->child;
+    temp_child=temp_child->child;
+
+    while(temp_head){
+        
+        dummy_i=dummy_head;
+        dummy_j=dummy_i->child;
+
+        while(temp_child){
+                connected=0;
+                 if(dummy_i->data < temp_child->data && temp_child->data < dummy_j->data){
+                    Node* temporary_store=new Node(temp_child->data);
+                    dummy_i->child=temporary_store;
+                    temporary_store->child=dummy_j;
+                    dummy_i=dummy_i->child;
+            }
+
+            else if(dummy_i->data < temp_child->data && dummy_j->data < temp_child->data){
+               if(dummy_i->child){
+                   dummy_i=dummy_i->child;
+               }
+                
+                if(dummy_j->child){
+                    dummy_j=dummy_j->child;
+                }
+
+                if(dummy_j->child==NULL && dummy_i==dummy_j){
+                    dummy_i->child=temp_child;
+                    dummy_i=dummy_i->child;
+                    dummy_j=dummy_i;
+                    temp_child=temp_child->child;
+                    break;
+                }
+
+                 if(connected==0){
+                      continue;
+                 }
+            }
+
+            else if(temp_child->data < dummy_i->data){
+                dummy_temp->child=temp_child;
+                temp_child->child=dummy_i;
+                dummy_i=dummy_temp;      
+            }
+
+          temp_child=temp_child->child;
+        }
+
+        temp_child=temp_head->next;
+        temp_head=temp_head->next;
+    }
+
+    dummy_head=dummy_head->child;
+    return dummy_head;
+}
