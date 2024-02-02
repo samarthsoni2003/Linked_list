@@ -1,5 +1,31 @@
 https://leetcode.com/problems/linked-list-cycle-ii/description/
 
+LOGIC 2 = EASY LOGIC 
+
+int k=0;
+        ListNode *iterator=head;
+        while(k < mid){
+            iterator=iterator->next;
+            k++;
+        }
+
+        k=0;
+        ListNode *element_checker=slow;
+         while(k < length_of_cycle){
+           if(iterator==element_checker){
+               return iterator;
+           }
+
+           element_checker=element_checker->next;
+           k++;
+         }
+          return NULL;
+        
+     }
+
+REST CODE SAME AS BELOW WE HAVE CHANGED THE FIRDT FUNCTION NOTHING ELSE 
+
+
 ListNode *check_wether_in_cycle(int length_of_cycle,int fast_ka_length,ListNode *head,int mid,ListNode *slow){
         int dummy=fast_ka_length+mid;
         dummy-=length_of_cycle;
