@@ -1,0 +1,25 @@
+https://www.codingninjas.com/studio/problems/merge-k-sorted-lists_992772?leftPanelTabValue=PROBLEM
+
+ode* mergeKLists(vector<Node*> &listArray){
+    priority_queue<pair<int,Node*> , vector<pair<int , Node*>> , greater<pair<int,Node* >>> pq;
+
+    for(int i=0; i < listArray.size(); i++){
+        if(listArray[i]){
+          pq.push({listArray[i]->data, listArray[i]});
+        }
+    }
+
+    Node* dummy_node=new Node(-1);
+    Node* temp_node=dummy_node;
+
+    while(!pq.empty()){
+        auto it=pq.top();
+        pq.pop();
+        if(it.second->next){
+          pq.push({it.second->next->data, it.second->next});
+        }
+        temp_node->next=it.second;
+        temp_node=temp_node->next;
+    }
+    return dummy_node->next;
+}
