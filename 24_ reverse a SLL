@@ -27,3 +27,34 @@ Node* reverseLinkedList(Node *head)
     Node*final_ans=function_to_reverse_ll_recursive(original_head,temp1,temp2,head);
     return final_ans; 
 }
+
+LOGIC 2 
+if(temp->next==NULL){
+         return temp;
+     }
+
+     Node *temp_2=temp;
+     temp=temp->next;
+     temp_2->next=NULL;
+     Node* temp_3 = function_to_reverse_ll_recursive(temp);
+     temp_3->next=temp_2;
+     return temp_2;
+}
+
+Node* reverseLinkedList(Node *head)
+{
+    if(head->next==NULL){
+        return head;
+    }
+
+    Node* temporary=head;
+    while(temporary->next){
+        temporary=temporary->next;
+    }
+
+    Node*temp=head;
+    function_to_reverse_ll_recursive(temp);
+    return temporary;
+}
+
+
