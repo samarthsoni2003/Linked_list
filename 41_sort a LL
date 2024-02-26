@@ -1,0 +1,134 @@
+https://www.codingninjas.com/studio/problems/sort-linked-list_920517?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+LOGIC 1 BUT GIVES TLE 
+Node *sortLL(Node *head)
+{
+   Node* dummy_head=new Node(-1);
+    Node* dummy_i=dummy_head;
+    Node* dummy_j=NULL;
+    Node* temp_head=head;
+    Node* temp_store=new Node(temp_head->data);
+    bool connected=0;
+
+    dummy_i->next=temp_store;
+    dummy_i=dummy_i->next;
+    temp_head=temp_head->next;
+
+    while(temp_head){
+        
+        dummy_i=dummy_head->next;
+
+        if(dummy_i->next){
+            dummy_j=dummy_i->next;
+        }
+
+        else{
+            dummy_j=dummy_i;
+        }
+
+        connected=0;
+        temp_store=new Node(temp_head->data);
+
+        while(connected == 0){
+
+            if(dummy_i->data <= temp_store->data && temp_store->data <= dummy_j->data && dummy_i != dummy_j){
+                    dummy_i->next=temp_store;
+                    temp_store->next=dummy_j;
+                    dummy_i=dummy_i->next;
+            }
+
+            else if(dummy_i->data <= temp_store->data && dummy_j->data <= temp_store->data){
+               if(dummy_i->next){
+                   dummy_i=dummy_i->next;
+               }
+                
+                if(dummy_j->next){
+                    dummy_j=dummy_j->next;
+                }
+
+                if(dummy_j->next==NULL && dummy_i==dummy_j){
+                    dummy_i->next=temp_store;
+                    dummy_i=dummy_i->next;
+                    dummy_j=dummy_i;
+                    break;
+                }
+
+                 if(connected==0){
+                      continue;
+                 }
+            }
+
+            else if(temp_store->data < dummy_i->data){
+                dummy_head->next=temp_store;
+                temp_store->next=dummy_i;    
+            }
+
+            break;
+        }
+
+        temp_head=temp_head->next;
+    }
+
+    return dummy_head->next;
+}
+
+LOGIC 2
+Node* findmiddle(Node *head){
+    Node* slow=head;
+    Node* fast=head;
+    while(fast->next && fast->next->next){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    return slow;
+}
+
+Node* merge_2_sorted_list(Node* left_head, Node* right_head){
+    
+        Node* dummyhead=new Node(0);
+        Node* dummytemp=dummyhead;
+        Node* temp1=left_head;
+        Node* temp2=right_head;
+
+        while(temp1 && temp2){
+            if(temp1->data <= temp2->data){
+                dummytemp->next=temp1;
+                temp1=temp1->next;
+            }
+
+            else{
+                 dummytemp->next=temp2; 
+                 temp2=temp2->next;
+            }
+
+            dummytemp=dummytemp->next;
+        }
+            if(temp1){
+                 dummytemp->next=temp1;
+            }
+
+            else{
+                 dummytemp->next=temp2;
+            }
+
+        return dummyhead->next;
+}
+
+Node* sortLL(Node *head)
+{
+
+  if(head == NULL || head->next==NULL){
+      return head;
+  }
+
+    Node* middle=findmiddle(head);
+    Node* left_head=head;
+    Node* right_head=middle->next;
+    middle->next=NULL;
+
+    left_head = sortLL(left_head);
+    right_head = sortLL(right_head);
+    return merge_2_sorted_list(left_head , right_head);
+}
+
+
