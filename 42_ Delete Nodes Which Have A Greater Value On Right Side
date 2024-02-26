@@ -1,0 +1,30 @@
+https://www.codingninjas.com/studio/problems/delete-nodes-which-have-a-greater-value-on-right-side_1115785?leftPanelTabValue=PROBLEM
+
+LinkedListNode<int> * solving_function(LinkedListNode<int> * head, bool helper){
+    if(head == NULL || head->next == NULL || helper){
+        return head;
+    }
+    if(head->data < head->next->data){
+        head=head->next;
+        return solving_function(head, helper);
+    }
+    LinkedListNode<int> * temp = head->next;
+    LinkedListNode<int> * temp_prev=head;
+    helper=true;
+    while(temp->next){
+        if(temp->data < temp->next->data){
+            temp_prev->next = temp->next;
+            helper=false;
+        }
+        temp_prev=temp_prev->next;
+        temp=temp_prev->next;
+        if(temp == NULL){
+            return solving_function(head, helper);
+        }
+    }
+    return solving_function(head,helper);
+}
+LinkedListNode<int> * deleteNodes(LinkedListNode<int> * head) {
+    bool helper=false;
+    return solving_function(head, helper);
+}
